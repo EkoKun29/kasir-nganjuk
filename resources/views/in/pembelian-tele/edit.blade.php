@@ -12,8 +12,8 @@
                         'name' => 'no_nota',
                         'type' => 'text',
                     ]) --}}
-                    <label class="col-form-label">No Nota</label>
-                    <select id="edit-surat" name="no_nota" id="selectInput">
+                    <label for="Input" class="form-label">No Nota</label>
+                    <select name="no_nota" id="edit5" data-dropdown-parent="{{ $ddp ?? '#editModal' }}"  required="">
                         <option selected disabled>Surat Gudang</option>
                         @foreach($surat as $h)
                             <option value="{{$h->nomor_surat}}">{{$h->nomor_surat}}</option>
@@ -56,9 +56,9 @@
                         'name' => 'harga',
                         'type' => 'number',
                     ]) --}}
-                    <label class="col-form-label">HPP</label>
-                    <select id="edit-hpp" name="harga" id="selectInput">
-                        <option selected disabled>Barang + Hpp</option>
+                    <label for="Input" class="form-label" >HPP</label>
+                    <select  name="harga" id="edit4" data-dropdown-parent="{{ $ddp ?? '#editModal' }}" id="selectInput" required="">
+                        <option selected>Barang + Hpp</option>
                         @foreach($hpp as $h)
                             <option value="{{$h->harga}}">{{$h->kode}}</option>
                         @endforeach

@@ -25,6 +25,21 @@
             theme: 'bootstrap4',
         });
 
+        $('#select4').select2({
+            theme: 'bootstrap4',
+        });
+
+        $('#select5').select2({
+            theme: 'bootstrap4',
+        });
+
+        $('#edit4').select2({
+            theme: 'bootstrap4',
+        });
+
+        $('#edit5').select2({
+            theme: 'bootstrap4',
+        });
         // RESET FORM INPUT WHEN CREATE MODAL ACTIVE
         $('#createModal').on('show.bs.modal', function() {
             $(this).find('form').trigger('reset');
