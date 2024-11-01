@@ -24,7 +24,7 @@ class PembelianTeleController extends Controller
     {
         $client2 = new Client();
 
-        $url2 = "https://algudang.dodolanobattani.com/api/no-surat";
+        $url2 = "https://gudangbaru.dodolanobattani.com/api/no-surat";
 
         $response2 = $client2->request('GET', $url2, [
             'verify'  => false,
