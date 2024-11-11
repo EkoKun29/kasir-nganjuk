@@ -27,6 +27,16 @@
                         </div>
                         <div class="col">
                             <label class="col-form-label">Konsumen</label>
+                            <select id="name-konsumen" name="nama_konsumen" placeholder="Nama Konsumen"
+                            autocomplete="off" required>
+                            <option value="" selected>Nama Konsumen</option>
+                            @foreach ($konsumens as $konsumen)
+                                <option value="{{ $konsumen->nama  }}">{{ $konsumen->nama  }}</option>
+                            @endforeach
+                        </select>
+                        </div>
+                        {{-- <div class="col">
+                            <label class="col-form-label">Konsumen</label>
                             <input list="nama_konsumenS" name="nama_konsumen" id="nama_konsumen" class="form-control"
                                 placeholder="Nama Konsumen" required>
                             <datalist id="nama_konsumenS">
@@ -34,7 +44,7 @@
                                     <option value="{{ $konsumen->nama }}">
                                 @endforeach
                             </datalist>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="row">
                         <div class="col">

@@ -36,6 +36,9 @@
     new TomSelect("#select-konsumen", {
         create: false,
     });
+    new TomSelect("#name-konsumen", {
+        create: false,
+    });
     </script>
     <script>
         // MENAMPILKAN TABLE
