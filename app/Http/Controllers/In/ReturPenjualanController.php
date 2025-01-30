@@ -107,7 +107,7 @@ class ReturPenjualanController extends Controller
     {
         $head  = ReturPenjualan::find($id);
         $data   = DetailReturPenjualan::where('retur_penjualan_id', $id)->get();
-        $barang = PersediaanDagang::select('nama_barang_dan_no_lot')->get();
+        $barang = Barang::all();
         return view('report.r-retur-penjualan.edit', compact('head','data', 'barang'));
     }
 
