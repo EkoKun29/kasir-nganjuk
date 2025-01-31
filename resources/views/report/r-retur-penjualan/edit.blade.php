@@ -89,11 +89,11 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>
                                 @include('components.select', [
-                                    'name' => 'nama_barang_dan_no_lot',
+                                    'name' => 'nama_barang',
                                     '_data' => $barang,
                                     '_item' => 'nama',
                                     'isArray' => '',
-                                    'selected' => $item->nama_barang_dan_no_lot,
+                                    'selected' => $item->nama_barang,
                                 ])
                             </td>
                             <td>

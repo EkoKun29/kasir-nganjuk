@@ -117,7 +117,7 @@ class ReturPenjualanController extends Controller
         try {
             $data = DetailReturPenjualan::find($id);
             $data->update([
-            'nama_barang_dan_no_lot' => $request->nama_barang_dan_no_lot,
+            'nama_barang'            => $request->nama_barang,
             'harga'                  => $request->harga,
             'qty'                    => $request->qty,
             'sub_total'              => ($request->harga * $request->qty),

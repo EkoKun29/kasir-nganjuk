@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/adminlte.min.css" />
 
     <!-- Datatables -->
-    <link rel="stylesheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css"> --}}
 
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/select2/css/select2.min.css">
