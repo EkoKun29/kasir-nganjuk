@@ -93,6 +93,7 @@
         var tgl_nota_piutang = '';
         var sisa_piutang = 0;
         var globalData = [];
+        var data_barang = <?php echo json_encode($data); ?>;
 
         // MENDAPATKAN NAMA KONSUMEN, UANG KELUAR, NO NOTA, TANGGAL NOTA, & SISA PIUTANG
         $('#nama_konsumen').change(function() {
@@ -117,32 +118,45 @@
 
         // SUBMIT ALL WITH POST
         function submitAll() {
-            if (kembalian < 0) {
-                alert('Kembalian tidak boleh minus!');
-            } else {
-                $.ajax({
-                    url: "{{ route('retur-penjualan.store') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: "POST",
-                    data: {
-                        nama_konsumen: nama_konsumen,
-                        total: totalPembayaran,
-                        uang_keluar: uang_keluar,
-                        kembalian: kembalian,
-                        no_nota_piutang: no_nota_piutang,
-                        tgl_nota_piutang: tgl_nota_piutang,
-                        sisa_piutang: sisa_piutang,
-                        data: globalData
-                    },
-                }).done(function(data) {
-                    $('body').html(data);
-                }).fail(function(data) {
-                    alert('Kesalahan pada website. Hubungi IT!');
-                });
-            }
+    if (kembalian < 0) {
+        alert('Kembalian tidak boleh minus!');
+    } else {
+        $.ajax({
+    url: "{{ route('retur-penjualan.store') }}", // URL untuk endpoint
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF
+    },
+    type: "POST",
+    dataType: "json", // Pastikan data yang diterima dalam format JSON
+    data: {
+        nama_konsumen: nama_konsumen,
+        total: totalPembayaran,
+        uang_keluar: uang_keluar,
+        kembalian: kembalian,
+        no_nota_piutang: no_nota_piutang,
+        tgl_nota_piutang: tgl_nota_piutang,
+        sisa_piutang: sisa_piutang,
+        data: globalData // Data tambahan yang dibutuhkan
+    },
+    success: function(response) {
+        console.log(response); // Debug respons
+        if (response.success) {
+            window.location.href = response.redirect_url; // Redirect ke halaman print jika sukses
+        } else {
+            alert('Terjadi kesalahan: ' + response.message); // Tampilkan pesan error
         }
+    },
+    error: function(xhr) {
+        console.log(xhr.responseText); // Debug error response
+        alert('Kesalahan pada server. Hubungi IT! \nError: ' + xhr.responseText); // Tampilkan pesan error server
+    }
+});
+
+    }
+}
+
+
+
 
         // MENGHAPUS ROW
         $("#tbl_retur_penjualan").on('click', '.btnDelete', function() {
