@@ -152,7 +152,7 @@
             totalHarga();
         });
 
-        // BERGUNA UNTUK MENENTUKAN TOTAL
+        // BERGUNA UNTUK MENENTUKAN TOTAL 
         function totalHarga() {
             totalPembayaran = globalData.reduce(function(acc, obj) {
                 return acc + obj.subtotal;
@@ -182,7 +182,7 @@
                 return false;
             }
 
-            // Menyimpan data
+            // Menyimpan data 
             var formReturPenjualan = $('#createReturPenjualan');
             var formData = formReturPenjualan.serializeArray();
 

@@ -91,7 +91,7 @@
                                 @include('components.select', [
                                     'name' => 'nama_barang_dan_no_lot',
                                     '_data' => $barang,
-                                    '_item' => 'nama_barang_dan_no_lot',
+                                    '_item' => 'nama',
                                     'isArray' => '',
                                     'selected' => $item->nama_barang_dan_no_lot,
                                 ])
