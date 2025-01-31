@@ -10,8 +10,8 @@ use App\Models\ReturPenjualan;
 use App\Traits\Buttons;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class ReturPenjualanController extends Controller
 {
