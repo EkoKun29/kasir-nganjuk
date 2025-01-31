@@ -17,16 +17,17 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/adminlte.min.css" />
+    
 
-    <!-- Datatables -->
-    {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css"> --}}
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
     
     {{-- Datatable --}}
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 </head>
 
