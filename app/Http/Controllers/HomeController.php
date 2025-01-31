@@ -75,14 +75,7 @@ class HomeController extends Controller
 
     public function print_retur_penjualan()
     {
-        // 🔍 Cek apakah session tersedia
         $new_data = session('new_data');
-
-        if (!$new_data) {
-            return redirect()->route('retur-penjualan')->with('error', 'Data tidak ditemukan. Silakan coba lagi.');
-        }
-
-        // 🔍 Ambil data detail berdasarkan ID
         $details = DetailReturPenjualan::where('retur_penjualan_id', $new_data->id)->get();
 
         return view('print.retur_penjualan', compact('new_data', 'details'));
