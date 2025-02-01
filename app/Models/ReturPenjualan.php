@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class ReturPenjualan extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'toko', 'nama_konsumen', 'total', 'uang_keluar', 
+        'kembalian', 'no_nota_piutang', 'tgl_nota_piutang', 'sisa_piutang'
+    ];
+    
 
     //hasManyDetailReturPenjualan
     public function detailReturPenjualan()
