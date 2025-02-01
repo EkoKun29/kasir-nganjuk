@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Log;
 
 class ReturPenjualanController extends Controller
 {
@@ -36,11 +37,11 @@ class ReturPenjualanController extends Controller
     }
 
     public function store(Request $request)
-    {
+{
+    DB::beginTransaction();
+    try {
         // STORE RETUR PENJUALAN
-        DB::beginTransaction();
-        try {
-            $new_data = ReturPenjualan::create([
+        $new_data = ReturPenjualan::create([
             'toko'              => 'TOKO NGANJUK',
             'nama_konsumen'     => $request->nama_konsumen,
             'total'             => $request->total,
@@ -49,11 +50,11 @@ class ReturPenjualanController extends Controller
             'no_nota_piutang'   => $request->no_nota_piutang,
             'tgl_nota_piutang'  => $request->tgl_nota_piutang,
             'sisa_piutang'      => $request->sisa_piutang
-            ]);
+        ]);
 
-            // STORE DETAIL RETUR PENJUALAN
-            $detail_data = $request->data;
-            foreach ($detail_data as $item => $value) {
+        // STORE DETAIL RETUR PENJUALAN
+        $detail_data = $request->data;
+        foreach ($detail_data as $item => $value) {
             DetailReturPenjualan::create([
                 'retur_penjualan_id'        => $new_data->id,
                 'nama_barang'               => $value['nama_barang'],
@@ -63,15 +64,23 @@ class ReturPenjualanController extends Controller
                 'qty'                       => $value['qty'],
                 'sub_total'                 => $value['subtotal']
             ]);
-            }
-
-            DB::commit();
-            return redirect()->route('print.retur.penjualan')->with(compact('new_data'));
-        } catch (\Exception $e) {
-            DB::rollback();
-            return redirect()->back()->with('danger', 'Error! Data gagal disimpan!');
         }
+
+        DB::commit();
+        return redirect()->route('print.retur.penjualan')->with(compact('new_data'));
+    } catch (\Exception $e) {
+        DB::rollBack();
+
+        // Log error ke storage/logs/laravel.log
+        Log::error('Error saat menyimpan retur penjualan: ' . $e->getMessage(), [
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+            'trace' => $e->getTraceAsString()
+        ]);
+
+        return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
     }
+}
 
     public function report()
     {
