@@ -117,6 +117,16 @@
 
         // SUBMIT ALL WITH POST
         function submitAll() {
+            console.log({
+        nama_konsumen: nama_konsumen,
+        total: totalPembayaran,
+        uang_keluar: uang_keluar,
+        kembalian: kembalian,
+        no_nota_piutang: no_nota_piutang,
+        tgl_nota_piutang: tgl_nota_piutang,
+        sisa_piutang: sisa_piutang,
+        data: globalData
+    });
             if (kembalian < 0) {
                 alert('Kembalian tidak boleh minus!');
             } else {

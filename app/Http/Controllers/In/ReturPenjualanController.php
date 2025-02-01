@@ -40,6 +40,7 @@ class ReturPenjualanController extends Controller
 {
     DB::beginTransaction();
     try {
+        Log::info('Memulai proses store retur penjualan', ['request' => $request->all()]);
         // STORE RETUR PENJUALAN
         $new_data = ReturPenjualan::create([
             'toko'              => 'TOKO NGANJUK',
@@ -65,6 +66,8 @@ class ReturPenjualanController extends Controller
                 'sub_total'                 => $value['subtotal']
             ]);
         }
+
+        Log::info('Data berhasil disimpan', ['new_data' => $new_data]);
 
         DB::commit();
         return redirect()->route('print.retur.penjualan')->with(compact('new_data'));
