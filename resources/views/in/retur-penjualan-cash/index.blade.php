@@ -13,7 +13,7 @@
                         <label class="col-form-label">Toko</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" class="form-control" value="TOKO WINONG" readonly>
+                        <input type="text" class="form-control" value="TOKO NGANJUK" readonly>
                     </div>
                 </div>
                 <div class="row align-items-center mb-3">
