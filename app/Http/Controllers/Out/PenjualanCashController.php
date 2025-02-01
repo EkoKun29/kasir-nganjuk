@@ -25,45 +25,38 @@ class PenjualanCashController extends Controller
     }
 
     public function store(Request $request)
-{
-    // Menyimpan data retur penjualan ke dalam array (simulasi tanpa DB)
-    $new_data = [
-        'toko'              => 'TOKO NGANJUK',
-        'nama_konsumen'     => $request->nama_konsumen,
-        'total'             => $request->total,
-        'uang_keluar'       => $request->uang_keluar,
-        'kembalian'         => $request->kembalian,
-        'no_nota_piutang'   => $request->no_nota_piutang,
-        'tgl_nota_piutang'  => $request->tgl_nota_piutang,
-        'sisa_piutang'      => $request->sisa_piutang
-    ];
+    {
+        $konsumen = Konsumen::where('nama',  $request->nama_konsumen)->first();
 
-    // Menyimpan detail retur penjualan ke dalam array (simulasi tanpa DB)
-    $detail_data = [];
-    foreach ($request->data as $value) {
-        $detail_data[] = [
-            'nama_barang'               => $value['nama_barang'],
-            'no_lot'                    => 0, // Sesuaikan dengan logika Anda
-            'nama_barang_dan_no_lot'    => $value['nama_barang'],
-            'harga'                     => $value['harga'],
-            'qty'                       => $value['qty'],
-            'sub_total'                 => $value['subtotal']
-        ];
+        if (!$konsumen) {
+            return redirect()->back()->with('delete', 'Error, Nama Konsumen Tidak Ada Didatabase!');
+        }
+
+        // STORE PENJUALAN CASH
+        $new_data = PenjualanCash::create([
+            'toko'          => 'TOKO NGANJUK',
+            'nama_konsumen' => $request->nama_konsumen,
+            'total'         => $request->total,
+            'bayar'         => $request->bayar,
+            'kembalian'     => $request->kembalian
+        ]);
+
+        // STORE DETAIL PENJUALAN CASH
+        $detail_data = $request->data;
+
+        foreach ($detail_data as $item => $value) {
+            $new_detail = DetailPenjualanCash::create([
+                'penjualan_cash_id'         => $new_data->id,
+                'nama_barang_dan_no_lot'    => $value['nama_barang_dan_no_lot'],
+                'harga'                     => $value['harga'],
+                'qty'                       => $value['qty'],
+                'diskon'                    => $value['diskon'],
+                'sub_total'                 => $value['subtotal']
+            ]);
+        }
+
+        return redirect()->route('print.penjualan.cash')->with(compact('new_data'));
     }
-
-    // Menyimpan data ke session agar bisa digunakan di view
-    session([
-        'new_data' => $new_data,
-        'detail_data' => $detail_data
-    ]);
-
-    // Mengembalikan respons atau redirect ke halaman print
-    return response()->json([
-        'message' => 'Data berhasil disimpan (simulasi tanpa DB)',
-        'redirect_url' => route('print.retur.penjualan')
-    ]);
-}
-
 
     public function report()
     {
