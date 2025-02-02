@@ -52,24 +52,27 @@ class ReturPenjualanController extends Controller
             'sisa_piutang'      => $request->input('sisa_piutang')
         ]);
 
+
         // Simpan detail retur penjualan
-        $detail_data = $request->input('data', []);
+        $detail_data = $request->data;
         foreach ($detail_data as $item) {
             DetailReturPenjualan::create([
                 'retur_penjualan_id' => $new_data->id,
                 'nama_barang'        => $item['nama_barang'],
-                'nama_barang_no_lot' => $item['nama_barang'],
-                'no_lot'             => $item['no_lot'] ?? null,
+                'nama_barang_dan_no_lot' => $item['nama_barang'],
+                'no_lot' => !empty($value['no_lot']) ? $item['no_lot'] : '0',
                 'qty'                => $item['qty'],
                 'harga'              => $item['harga'],
-                'subtotal'           => $item['subtotal']
+                'sub_total'           => $item['subtotal']
             ]);
+
         }
 
             DB::commit();
             return redirect()->route('print.retur.penjualan')->with(compact('new_data'));
         } catch (\Exception $e) {
             DB::rollback();
+            Log::error('Error saat menyimpan retur penjualan: ' . $e->getMessage());
             return redirect()->back()->with('danger', 'Error! Data gagal disimpan!');
         }
     }

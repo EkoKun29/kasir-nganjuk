@@ -117,50 +117,33 @@
 
         // SUBMIT ALL WITH POST
         function submitAll() {
-    console.log({
-        nama_konsumen: nama_konsumen,
-        total: totalPembayaran,
-        uang_keluar: uang_keluar,
-        kembalian: kembalian,
-        no_nota_piutang: no_nota_piutang,
-        tgl_nota_piutang: tgl_nota_piutang,
-        sisa_piutang: sisa_piutang,
-        data: globalData
-    });
-
-    if (kembalian < 0) {
-        alert('Kembalian tidak boleh minus!');
-        return; // Stop eksekusi jika kembalian minus
-    }
-
-    $.ajax({
-        url: "{{ route('retur-penjualan.store') }}",
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        type: "POST",
-        contentType: "application/json", // Pastikan format JSON
-        data: JSON.stringify({
-            nama_konsumen: nama_konsumen,
-            total: totalPembayaran,
-            uang_keluar: uang_keluar,
-            kembalian: kembalian,
-            no_nota_piutang: no_nota_piutang,
-            tgl_nota_piutang: tgl_nota_piutang,
-            sisa_piutang: sisa_piutang,
-            data: globalData
-        }),
-        success: function(response) {
-            alert('Data berhasil disimpan!');
-            console.log(response);
-        },
-        error: function(xhr, status, error) {
-            console.error('Terjadi kesalahan:', error);
-            console.log(xhr.responseText); // Debugging error server
-            alert('Gagal menyimpan data. Silakan cek kembali.');
+            if (kembalian < 0) {
+                alert('Kembalian tidak boleh minus!');
+            } else {
+                $.ajax({
+                    url: "{{ route('retur-penjualan.store') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    data: {
+                        nama_konsumen: nama_konsumen,
+                        total: totalPembayaran,
+                        uang_keluar: uang_keluar,
+                        kembalian: kembalian,
+                        no_nota_piutang: no_nota_piutang,
+                        tgl_nota_piutang: tgl_nota_piutang,
+                        sisa_piutang: sisa_piutang,
+                        data: globalData
+                    },
+                }).done(function(data) {
+                    $('body').html(data);
+                }).fail(function(data) {
+                    alert('Kesalahan pada website. Hubungi IT!');
+                });
+            }
         }
-    });
-}
+
 
 
         // MENGHAPUS ROW
