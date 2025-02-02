@@ -37,53 +37,42 @@ class ReturPenjualanController extends Controller
     }
 
     public function store(Request $request)
-{
-    DB::beginTransaction();
+    {
+
+        DB::beginTransaction();
     try {
-        Log::info('Memulai proses store retur penjualan', ['request' => $request->all()]);
-        // STORE RETUR PENJUALAN
         $new_data = ReturPenjualan::create([
             'toko'              => 'TOKO NGANJUK',
-            'nama_konsumen'     => $request->nama_konsumen,
-            'total'             => $request->total,
-            'uang_keluar'       => $request->uang_keluar,
-            'kembalian'         => $request->kembalian,
-            'no_nota_piutang'   => $request->no_nota_piutang,
-            'tgl_nota_piutang'  => $request->tgl_nota_piutang,
-            'sisa_piutang'      => $request->sisa_piutang
+            'nama_konsumen'     => $request->input('nama_konsumen'),
+            'total'             => $request->input('total'),
+            'uang_keluar'       => $request->input('uang_keluar'),
+            'kembalian'         => $request->input('kembalian'),
+            'no_nota_piutang'   => $request->input('no_nota_piutang'),
+            'tgl_nota_piutang'  => $request->input('tgl_nota_piutang'),
+            'sisa_piutang'      => $request->input('sisa_piutang')
         ]);
 
-        // STORE DETAIL RETUR PENJUALAN
-        $detail_data = $request->data;
-        foreach ($detail_data as $item => $value) {
+        // Simpan detail retur penjualan
+        $detail_data = $request->input('data', []);
+        foreach ($detail_data as $item) {
             DetailReturPenjualan::create([
-                'retur_penjualan_id'        => $new_data->id,
-                'nama_barang'               => $value['nama_barang'],
-                'no_lot'                    => 0,
-                'nama_barang_dan_no_lot'    => $value['nama_barang'],
-                'harga'                     => $value['harga'],
-                'qty'                       => $value['qty'],
-                'sub_total'                 => $value['subtotal']
+                'retur_penjualan_id' => $new_data->id,
+                'nama_barang'        => $item['nama_barang'],
+                'nama_barang_no_lot' => $item['nama_barang'],
+                'no_lot'             => $item['no_lot'] ?? null,
+                'qty'                => $item['qty'],
+                'harga'              => $item['harga'],
+                'subtotal'           => $item['subtotal']
             ]);
         }
 
-        Log::info('Data berhasil disimpan', ['new_data' => $new_data]);
-
-        DB::commit();
-        return redirect()->route('print.retur.penjualan')->with(compact('new_data'));
-    } catch (\Exception $e) {
-        DB::rollBack();
-
-        // Log error ke storage/logs/laravel.log
-        Log::error('Error saat menyimpan retur penjualan: ' . $e->getMessage(), [
-            'file' => $e->getFile(),
-            'line' => $e->getLine(),
-            'trace' => $e->getTraceAsString()
-        ]);
-
-        return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+            DB::commit();
+            return redirect()->route('print.retur.penjualan')->with(compact('new_data'));
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('danger', 'Error! Data gagal disimpan!');
+        }
     }
-}
 
     public function report()
     {
