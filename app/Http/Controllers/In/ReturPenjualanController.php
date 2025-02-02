@@ -63,7 +63,8 @@ class ReturPenjualanController extends Controller
                 'no_lot' => !empty($value['no_lot']) ? $item['no_lot'] : '0',
                 'qty'                => $item['qty'],
                 'harga'              => $item['harga'],
-                'sub_total'           => $item['subtotal']
+                'sub_total'           => $item['subtotal'],
+                'hpp'                => $item['hpp'] ?? 0
             ]);
 
         }
