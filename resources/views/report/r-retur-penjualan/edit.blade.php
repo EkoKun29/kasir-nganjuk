@@ -42,7 +42,7 @@
                     @include('components.input', [
                         'name' => 'tgl_nota_piutang',
                         'type' => 'date',
-                        'value' => $head->no_nota_piutang,
+                        'value' => $head->tgl_nota_piutang,
                     ])
                 </div>
                 <div class="col-4">
