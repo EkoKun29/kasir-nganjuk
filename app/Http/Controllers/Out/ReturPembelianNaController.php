@@ -55,8 +55,8 @@ class ReturPembelianNaController extends Controller
                 'nama_barang_dan_no_lot'    => $value['nama_barang'] . ' // ' . $value['no_lot'],
                 'harga'                     => $value['harga'],
                 'qty'                       => $value['qty'],
-                'retur_ngurang_hutang'      => $value['retur_ngurang_hutang'],
-                'retur_minta_cash'          => $value['retur_minta_cash'],
+                'retur_ngurang_hutang'      => $value['retur_ngurang_hutang'] ?? 0,
+                'retur_minta_cash'          => $value['retur_minta_cash'] ?? 0,
                 'sub_total'                 => $value['subtotal']
             ]);
         }
