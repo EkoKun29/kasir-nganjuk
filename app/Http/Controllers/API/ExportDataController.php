@@ -33,13 +33,13 @@ class ExportDataController extends Controller
     {
         $pembelianNaCash = PembelianAl::whereNot('nama_suplier', 'ALIANSYAH')
             ->whereNot('nama_suplier', 'CV. ALIANSYAH')
-            ->whereNot('nama_suplier', 'CV Aliansyah')->whereDate('created_at', '>=', $startDate)
-            ->whereDate('created_at', '<=', $endDate)->get();
+            ->whereNot('nama_suplier', 'CV Aliansyah')->whereDate('tanggal', '>=', $startDate)
+            ->whereDate('tanggal', '<=', $endDate)->get();
 
         $pembelianNaHutang = PembelianNa::whereNot('nama_suplier', 'ALIANSYAH')
             ->whereNot('nama_suplier', 'CV. ALIANSYAH')
-            ->whereNot('nama_suplier', 'CV Aliansyah')->whereDate('created_at', '>=', $startDate)
-            ->whereDate('created_at', '<=', $endDate)->get();
+            ->whereNot('nama_suplier', 'CV Aliansyah')->whereDate('tanggal', '>=', $startDate)
+            ->whereDate('tanggal', '<=', $endDate)->get();
 
         $pembelianNa = $pembelianNaCash->concat($pembelianNaHutang);
 
