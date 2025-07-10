@@ -36,7 +36,7 @@ class PembelianTeleController extends Controller
 
         $client = new Client();
 
-        $url = "https://script.googleusercontent.com/macros/echo?user_content_key=qKClRjUd7j25BHCJYgNwKeUC3JitpYfJMGDyprREsETZw2ZI4wQa-6v-6eZYVwU4Q09wAQWa3GJNkMA7W40_4oOaafgPbdMxm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnNwWeD2dQWv23Ay3Cm4KHSYVIgXhj2KqWXvvYSXIV2oRhw6qUOSUblnBQmLNNJlUhYKGiinAl10aHfbuxWnT9cuJDgESGDbNcg&lib=MKHKyqJ4E2bpRAGaXB0u-GOj-0yJRUXWL";
+        $url = "https://script.google.com/macros/s/AKfycbwo2HwRj3LEq7nsj4LK_m_WXXXhf42VTUiXnIIuDE4XW0NN3BQqvC5znH6vYt2zSNcO/exec";
 
         $response = $client->request('GET', $url, [
             'verify'  => false,
