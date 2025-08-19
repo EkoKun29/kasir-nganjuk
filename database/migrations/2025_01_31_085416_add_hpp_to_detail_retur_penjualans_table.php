@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('detail_retur_penjualans')) {
         Schema::table('detail_retur_penjualans', function (Blueprint $table) {
             $table->integer("hpp")->nullable();
         });
+        }
     }
 
     /**
