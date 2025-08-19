@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('pembelian_teles')) {
         Schema::create('pembelian_teles', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->string('hutang')->nullable();
             $table->timestamps();
         });
+        }
     }
 
     /**
