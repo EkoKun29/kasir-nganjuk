@@ -21,6 +21,7 @@
                     <th>Tunai</th>
                     <th>Transfer</th>
                     <th>Bank</th>
+                    <th>Barter</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -77,6 +78,10 @@
                 {
                     data: 'bank',
                     name: 'bank'
+                },
+                {
+                    data: 'keterangan',
+                    name: 'keterangan'
                 },
                 {
                     data: 'action',
@@ -137,6 +142,7 @@
                 $('input[name="tunai"]').val(data.data.tunai);
                 $('input[name="tf"]').val(data.data.tf);
                 $('select[name="bank"]').val(data.data.bank).trigger('change');
+                $('select[name="keterangan"]').val(data.data.keterangan).trigger('change');
             }).fail(function(data) {
                 alert('Kesalahan pada website. Hubungi IT!');
             });

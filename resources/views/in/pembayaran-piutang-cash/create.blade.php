@@ -68,6 +68,18 @@
                         'name' => 'tf',
                         'type' => 'number',
                     ])
+                    @include('components.select', [
+                        'label' => 'Keterangan',
+                        'name' => 'keterangan',
+                        '_data' => $ket,
+                        '_item' => 'keterangan',
+                        'isArray' => 'Yes',
+                    ])
+
+                    <small class="form-text text-muted">
+                        👉 Jika pembayaran <b>barter</b>, maka nominal taruh di <b>Cash</b> dan pilih keterangan <b>Barter</b>.<br>
+                        👉 Jika selain barter, keterangan <b>tidak perlu diisi</b>.
+                    </small>
                     @include('components.button', ['submit' => 'submit', 'close' => 'close'])
                 </form>
             </div>

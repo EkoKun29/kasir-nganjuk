@@ -29,9 +29,12 @@ class PembayaranPiutangCashController extends Controller
             ['bank' => 'BCA 163'],
             ['bank' => 'DANAMON 503'],
         ]);
+        $ket = collect([
+            ['keterangan' => 'BARTER'],
+        ]);
         $no_nota = PenjualanPiutang::select('no_nota')->get();
         $konsumens = Konsumen::all();
-        return view('in.pembayaran-piutang-cash.index', compact('bank', 'no_nota', 'konsumens'));
+        return view('in.pembayaran-piutang-cash.index', compact('bank', 'ket', 'no_nota', 'konsumens'));
     }
 
     public function store(Request $request)

@@ -85,6 +85,13 @@
                         'name' => 'tf',
                         'type' => 'number',
                     ])
+                    @include('components.select', [
+                        'label' => 'Keterangan',
+                        'name' => 'keterangan',
+                        '_data' => $ket,
+                        '_item' => 'keterangan',
+                        'isArray' => 'Yes',
+                    ])
                     @include('components.button', ['submit' => 'submit', 'close' => 'close'])
                 </form>
             </div>

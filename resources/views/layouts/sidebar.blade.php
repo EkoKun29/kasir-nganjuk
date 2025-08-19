@@ -388,7 +388,7 @@
                                 class="nav-link {{ Route::is('pembayaran-piutang-cash.index') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-money-bill"></i>
                                 <p>
-                                    Tunai/Transfer
+                                    CASH/TF/BARTER
                                 </p>
                             </a>
                         </li>
