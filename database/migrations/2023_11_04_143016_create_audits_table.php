@@ -13,17 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('audits')) {
         Schema::create('audits', function (Blueprint $table) {
             $table->id();
             $table->integer('id_opname_global')->nullable();
-            $table->string('nama_barang')->nullable();
+            $table->string('nama_barang', 125)->nullable();
             $table->integer('duz')->nullable();
             $table->integer('btl')->nullable();
-            $table->integer('total')->nullable(); 
-            $table->string('penyetok')->nullable();
+            $table->integer('total')->nullable();
+            $table->string('penyetok', 125)->nullable();
             $table->integer('kategori')->nullable();
             $table->timestamps();
         });
+    }
     }
 
     /**
