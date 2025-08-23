@@ -25,6 +25,7 @@ class PenjualanTFController extends Controller
             ['bank' => 'BRI 302'],
             ['bank' => 'BRI 503'],
             ['bank' => 'BRI 500'],
+            ['bank' => 'BRI 535'],
             ['bank' => 'BRI 536'],
             ['bank' => 'MANDIRI 522'],
             ['bank' => 'MANDIRI 016'],
