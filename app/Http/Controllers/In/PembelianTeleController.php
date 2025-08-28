@@ -55,7 +55,7 @@ class PembelianTeleController extends Controller
     public function store(Request $request)
     {
         $pembelianTele = new PembelianTele();
-        $pembelianTele->tanggal = $request->tanggal;
+        $pembelianTele->tanggal = now();
         $pembelianTele->no_nota = $request->no_nota;
         $pembelianTele->atas_nama_sales = $request->atas_nama_sales;
         $pembelianTele->yang_bawa_barang = $request->yang_bawa_barang;

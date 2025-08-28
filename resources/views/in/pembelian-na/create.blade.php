@@ -12,11 +12,11 @@
                         'name' => 'no_nota',
                         'type' => 'text',
                     ])
-                    @include('components.input', [
+                    {{-- @include('components.input', [
                         'label' => 'Tanggal',
                         'name' => 'tanggal',
                         'type' => 'date',
-                    ])
+                    ]) --}}
                     <div class="row">
                         <div class="col">
                             @include('components.input', [

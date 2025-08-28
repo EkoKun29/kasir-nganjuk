@@ -14,7 +14,7 @@
                     ])
                     @include('components.input', [
                         'label' => 'Tanggal',
-                        'name' => 'tanggal',
+                        'name' => 'created_at',
                         'type' => 'date',
                     ])
                     <div class="row">

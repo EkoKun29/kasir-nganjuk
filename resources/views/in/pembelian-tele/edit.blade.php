@@ -18,7 +18,12 @@
                         @foreach($surat as $h)
                             <option value="{{$h->nomor_surat}}">{{$h->nomor_surat}}</option>
                         @endforeach
-                    </select>
+                    </select>
+                    @include('components.input', [
+                        'label' => 'Tanggal',
+                        'name' => 'created_at',
+                        'type' => 'date',
+                    ])
                     <div class="row">
                         <div class="col">
                             @include('components.input', [

@@ -12,6 +12,11 @@
                         'name' => 'no_nota',
                         'type' => 'number',
                     ])
+                    @include('components.input', [
+                        'label' => 'Tanggal',
+                        'name' => 'created_at',
+                        'type' => 'date',
+                    ])
                     <div class="row">
                         <div class="col">
                             @include('components.input', [
@@ -30,10 +35,16 @@
                             ])
                         </div>
                     </div>
-                    @include('components.input', [
-                        'label' => 'Nama Supplier',
-                        'name' => 'nama_suplier',
-                    ])
+                    <div class="mb-3">
+                        <label for="Input" class="form-label">Nama Supplier</label>
+                        <input list="nama_supliers" name="nama_suplier" id="nama_suplier"
+                            class="form-control" placeholder="Nama Supplier" value="{{ isset($suppliers[0]->supplier) ? $suppliers[0]->supplier : '' }}" required>
+                        <datalist id="nama_supliers">
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->supplier }}"></option>
+                            @endforeach
+                        </datalist>
+                    </div>
                     @include('components.select', [
                         'label' => 'Nama Barang',
                         'name' => 'nama_barang',

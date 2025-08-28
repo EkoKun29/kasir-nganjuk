@@ -9,6 +9,7 @@ use App\Traits\Buttons;
 use App\Traits\Stock;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use GuzzleHttp\Client;
 
 class PembelianNaTFController extends Controller
 {
@@ -16,14 +17,28 @@ class PembelianNaTFController extends Controller
 
     public function index()
     {
+        try {
+            $client = new Client();
+
+            $url = "https://script.googleusercontent.com/macros/echo?user_content_key=wymnaJdgaf9PWebGlr6AKtqbMTeb8sLMViKDXwZjZ_WUdufnJCPBF0h4h8YQR4vV2opWJTKtY5BCfmH_WRf_RaBG_-oIpW3-OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa97Jlfpqb5gk5DD9ga4qFp9vsAFaor28-33lfEd9aDExbHFKlnzT0cG5-eiLc3q17JDeUbMBS6kZWsCtmzGBfg6vHprm2nCKwQtBHn44AOQPcZzeRtEUbgGWVkaSvQ_EsQ&lib=MwrS5UL2suXhr7r5eut16IRQ628Yks6X1";
+
+            $response = $client->request('GET', $url, [
+                'verify'  => false,
+            ]);
+
+            $data = json_decode($response->getBody());
+            $suppliers = collect($data); // Change to collection
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('danger', 'Gagal Mengambil Data Supplier!.');
+        }
         $data = Barang::all();
-        return view('in.pembelian-na-tf.index', compact('data'));
+        return view('in.pembelian-na-tf.index', compact('data', 'suppliers'));
     }
 
     public function store(Request $request)
     {
         $data = new PembelianNaTf();
-        $data->tanggal = $request->tanggal;
+        $data->tanggal = now();
         $data->no_nota = $request->no_nota;
         $data->atas_nama_sales = $request->atas_nama_sales;
         $data->yang_bawa_barang = $request->yang_bawa_barang;

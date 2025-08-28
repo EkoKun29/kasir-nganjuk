@@ -51,8 +51,18 @@
                     name: 'no_nota'
                 },
                 {
-                    data: 'tanggal',
-                    name: 'tanggal'
+                    data: 'created_at',
+                    name: 'created_at',
+                    render: function(data) {
+                        if (!data) return '';
+                        // Pastikan format aman: ganti spasi jadi 'T'
+                        let clean = data.replace(' ', 'T'); 
+                        let dateObj = new Date(clean);
+                        let day = String(dateObj.getDate()).padStart(2, '0');
+                        let month = String(dateObj.getMonth() + 1).padStart(2, '0');
+                        let year = dateObj.getFullYear();
+                        return `${day}/${month}/${year}`;
+                    }
                 },
                 {
                     data: 'atas_nama_sales',
@@ -132,6 +142,9 @@
                 $('#editModal').modal();
                 $('#editForm').attr('action', `pembelian-tele/update/${_id}`);
                 $('input[name="no_nota"]').val(data.data.no_nota);
+                $('input[name="created_at"]').val(
+                    data.data.created_at ? data.data.created_at.split(' ')[0] : ''
+                );
                 $('input[name="nama_suplier"]').val(data.data.nama_suplier);
                 $('input[name="no_lot"]').val(data.data.no_lot);
                 $('input[name="harga"]').val(data.data.harga);
@@ -159,6 +172,6 @@
     new TomSelect("#edit-surat", {
         create: false,
     });
-    </script>
+</script>
 
 @endpush

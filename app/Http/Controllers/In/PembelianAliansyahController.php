@@ -40,7 +40,7 @@ class PembelianAliansyahController extends Controller
     public function store(Request $request)
     {
         $data = new PembelianAl();
-        $data->tanggal = $request->tanggal;
+        $data->tanggal = now();
         $data->no_surat_jalan = $request->no_surat_jalan;
         $data->atas_nama_sales = $request->atas_nama_sales;
         $data->yang_bawa_barang = $request->yang_bawa_barang;

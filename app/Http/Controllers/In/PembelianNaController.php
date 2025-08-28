@@ -41,7 +41,7 @@ class PembelianNaController extends Controller
     public function store(Request $request)
     {
         $data = new PembelianNa();
-        $data->tanggal = $request->tanggal;
+        $data->tanggal = now();
         $data->no_nota = $request->no_nota;
         $data->atas_nama_sales = $request->atas_nama_sales;
         $data->yang_bawa_barang = $request->yang_bawa_barang;

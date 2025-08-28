@@ -12,6 +12,11 @@
                         'name' => 'no_surat_jalan',
                         'type' => 'text',
                     ])
+                    @include('components.input', [
+                        'label' => 'Tanggal',
+                        'name' => 'created_at',
+                        'type' => 'date',
+                    ])
                     <div class="row">
                         <div class="col">
                             @include('components.input', [
