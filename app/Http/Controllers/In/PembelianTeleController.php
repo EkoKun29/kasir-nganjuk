@@ -26,12 +26,23 @@ class PembelianTeleController extends Controller
 
         $url2 = "https://gudangbaru.dodolanobattani.com/api/no-surat";
 
+        $urlnew = "https://gudangal.com/api/no-surat";
+
         $response2 = $client2->request('GET', $url2, [
             'verify'  => false,
         ]);
 
+        $responseNew = $client2->request('GET', $urlnew, [
+            'verify'  => false,
+        ]);
+
         $dataApi2 = json_decode($response2->getBody());
-        $surat = collect($dataApi2); // Change to collection
+        $suratLama = collect($dataApi2); // Change to collection
+
+        $dataApiNew = json_decode($responseNew->getBody());
+        $suratNew = collect($dataApiNew); // Change to collection
+
+        $surat = $suratLama->concat($suratNew);
 
 
         $client = new Client();
